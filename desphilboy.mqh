@@ -1,3 +1,4 @@
+// heaer file for desphilboy
 //+------------------------------------------------------------------+
 //|                                                   desphilboy.mqh |
 //|                                                       Desphilboy |
@@ -25,7 +26,9 @@ enum Groups { NoGroup=0, LongTerm=LONGTERMGROUP, MediumTerm=MEDTERMGROUP, ShortT
 #define     ImanTrailing_ID               100000
 #define     GroupedImanTrailing_ID        200000
 #define     DesphilboyPositionCreator_ID  300000
+#define     DAPositionCreator_ID          400000
 
+// fibonacci
 enum FiboRetrace {NoRetrace=0, MinRetrace, LowRetrace, HalfRetrace, MaxRetrace};
 double Fibo[]={0.000, 0.236, 0.382, 0.500, 0.618};
 

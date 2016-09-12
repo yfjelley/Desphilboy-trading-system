@@ -1,6 +1,6 @@
 #property copyright "Iman Dezfuly"
 #property link      "http://www.Iman.ir"
-#define version      "201608232"
+#define version      "201609122"
 
 extern bool   AllPositions  =True;         // if true will effect all pairs, false only current chart
 extern int    TrailingStop  =200;            // distance of trailing stop from price

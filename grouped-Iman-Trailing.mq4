@@ -1,12 +1,14 @@
+// simple trailing stop
 #property copyright "Iman Dezfuly"
 #property link      "http://www.Iman.ir"
-#define version      "201608301"
+
+#define version      "201609121"
 
 #include "./desphilboy.mqh"
 
 extern bool   AllPositions  =True;         
-extern int    TrailingStopL = 350, TrailingStopM = 200, TrailingStopS = 50, TrailingStopU = 30;            
-extern int    TrailingStepL  =70, TrailingStepM = 50, TrailingStepS = 30, TrailingStepU = 20;             
+extern int    TrailingStopL = 450, TrailingStopM = 270, TrailingStopS = 150, TrailingStopU = 100;            
+extern int    TrailingStepL  =70, TrailingStepM = 60, TrailingStepS = 50, TrailingStepU = 40;             
 extern FiboRetrace  RetraceFactorL=MaxRetrace, RetraceFactorM = HalfRetrace, RetraceFactorS = LowRetrace, RetraceFactorU = MinRetrace;
 
 
