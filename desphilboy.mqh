@@ -20,6 +20,8 @@
 #define     USERGROUP         40000
 
 enum Groups { NoGroup=0, LongTerm=LONGTERMGROUP, MediumTerm=MEDTERMGROUP, ShortTerm=SHORTTERMGROUP, UserGroup=USERGROUP };
+enum BuyTypes { Buy, BuyLimit, BuyStop};
+enum SellTypes { Sell, SellLimit, SellStop}; 
  
 
 // EA signature on the position
@@ -92,4 +94,14 @@ string getGroupName( int magicNumber)
                                  else if(isManual(magicNumber)){ return "Manual";}
                                           else return "Unknown";
 
+}
+
+
+Groups getGroup( int magicNumber )
+{
+if(isLongTerm(magicNumber)) { return LongTerm; }
+      else if(isMediumTerm(magicNumber)){return MediumTerm;}
+               else if(isShortTerm(magicNumber)){return ShortTerm;}
+                        else if(isUserGroup(magicNumber)){return UserGroup;}
+return NoGroup;
 }

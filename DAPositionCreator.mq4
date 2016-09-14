@@ -1,52 +1,39 @@
 // Desphilboy Advanced Position Creator
 #property copyright "Iman Dezfuly"
 #property link      "http://www.Iman.ir"
-
 #define version      "201609121"
 
 #include "./desphilboy.mqh"
 
 extern bool    CreatePositions = false;
-
 extern int     NumberOfBuyStops  = 5;
 extern int     NumberOfSellStops  = 5;
-
 extern double  BuyLots = 0.01;
 extern double  SellLots = 0.01;
-
 extern double  StartingPrice = 0.0;
 extern int     PIPsToStartBuyStops = 100;
 extern int     PIPsToStartSellStops = 100;
-
-extern int     DistanceBetweenBuyStops = 300;
-extern int     DistanceBetweenSellStops = 300;
-
+extern int     DistanceBetweenBuyStops = 250;
+extern int     DistanceBetweenSellStops = 250;
 extern Groups  BuyStopsGroup = ShortTerm;
 extern Groups  SellStopsGroup = ShortTerm;
 
-
-extern int StopLossBuys = 300;
+extern int StopLossBuys = 0;
 extern int TakeProfitBuys = 0;
-
-extern int StopLossSells = 300;
+extern int StopLossSells = 0;
 extern int TakeProfitSells = 0;
-
 extern int TradesExpireAfterHours = 0;
-
 extern color ColourBuys = clrNONE;
 extern color ColourSells = clrNONE;
 extern int Slippage = 20;
 
 static bool once = false;
 
-
-
 void init()
 {
 Print("Desphilboy Advanced position creator ",version, " on ", Symbol());
-
 if ( CreatePositions ) { once = true; }
-
+return;
 }
 
 
@@ -133,8 +120,8 @@ int createSellStop( int index)
 {
 datetime now = TimeCurrent();
 datetime expiry = TradesExpireAfterHours != 0 ? now + TradesExpireAfterHours * 3600 : 0;
-double baseprice = StartingPrice == 0.0 ? Bid : StartingPrice;
 double pip = MarketInfo(Symbol(), MODE_POINT);
+double baseprice = StartingPrice == 0.0 ? Bid : StartingPrice;
 double price =  baseprice - ( DistanceBetweenSellStops * index + PIPsToStartSellStops) * pip;
 double stopLoss = StopLossSells !=0 ? price + StopLossSells * pip : 0;
 double takeProfit = TakeProfitSells != 0 ? price - TakeProfitSells * pip : 0;
