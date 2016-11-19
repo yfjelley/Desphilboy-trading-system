@@ -29,13 +29,29 @@ extern int Slippage = 20;
 
 static bool once = false;
 
+#define delaySecondsBeforeConfirm 2
+
 void init()
 {
-Print("Desphilboy Advanced position creator ",version, " on ", Symbol());
-if ( CreatePositions ) { once = true; }
+   Print("Desphilboy Advanced position creator ",version, " on ", Symbol());
+   if ( CreatePositions ) { 
+      EventSetTimer(delaySecondsBeforeConfirm); 
+      CreatePositions = false;
+   }
 return;
 }
 
+
+void OnTimer() {
+   EventKillTimer();
+   int result = MessageBox("Are you sure you want to create " + Symbol() +" positions according to params?",
+                              "Confirm creation of positions:",
+                              MB_OKCANCEL + MB_ICONWARNING +MB_DEFBUTTON2
+                              );
+   if( result == IDOK){
+      once = true;
+   }
+}
 
 
 
@@ -46,18 +62,11 @@ void start()
 {
   if(once) 
    {  
-      int result = MessageBox("Are you sure you want to create positions according to params?",
-                              "Confirm creation of positions:",
-                              MB_OKCANCEL + MB_ICONWARNING +MB_DEFBUTTON2
-                              );
-                              
-      if( result == IDOK) { doPositions(); }
+      doPositions();
       once = false;
    }
-   
   return;
 }
-  
 
 
 int doPositions()

@@ -5,34 +5,19 @@
 #include "./desphilboy.mqh"
 
 extern int OrderNumber = 0;
+extern color LongColour = clrAliceBlue;
+extern color MedColour = clrLightPink;
+extern color ShortColour = clrKhaki;
+extern color UserColour = clrOrange;
 
-static bool once = true;
 
 void init()
 {
-Print("Desphilboy position marker ",version, " on ", Symbol());
-}
-
-
-
-
-//+------------------------------------------------------------------+
-//| expert start function                                            |
-//+------------------------------------------------------------------+
-void start() 
-{
-  if(once) 
-   {
-      markPositions();
-      once = false;
-      if(!once) {
-         ExpertRemove();
-      }
-   }
+   Print("Desphilboy position marker ",version, " on ", Symbol());
+   markPositions();
+   //ExpertRemove();
    
-  return;
 }
-  
 
 int markPositions()
 {
@@ -44,7 +29,10 @@ int markPositions()
         {
             OrderPrint(); 
             Print( "Order ", OrderTicket(), " has group ", getGroupName(OrderMagicNumber()));
+            paintPosition();
+           
         }
+       
       }
       
      if( OrderNumber !=0 ){
@@ -56,6 +44,16 @@ int markPositions()
       
    return(0); 
 }
-
-
  
+ 
+void paintPosition()
+{
+       string name = "gmobj"; // + IntegerToString(OrderTicket());
+        Print ("Chart id", name);
+       /* bool bCreateResult = ObjectCreate(ChartID(), name, OBJ_ARROW_BUY,0, ChartTimeOnDropped(), OrderOpenPrice());
+        if(bCreateResult){
+            ObjectSetInteger(ChartID(),name,OBJPROP_COLOR,clrBeige);
+        } else {
+            Print("object creation unsuccessful");
+        } */
+}
